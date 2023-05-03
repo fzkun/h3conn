@@ -1,4 +1,4 @@
-module codeup.aliyun.com/5f900ce31858a17210467dbb/polevpn-pkg/h3conn
+module github.com/fzkun/h3conn
 
 go 1.20
 
