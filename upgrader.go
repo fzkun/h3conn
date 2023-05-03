@@ -2,12 +2,12 @@ package h3conn
 
 import (
 	"fmt"
+	"github.com/quic-go/quic-go"
 	"io"
 	"net"
 	"net/http"
 
-	"github.com/lucas-clemente/quic-go"
-	"github.com/lucas-clemente/quic-go/http3"
+	"github.com/quic-go/quic-go/http3"
 )
 
 var ErrHTTP3NotSupported = fmt.Errorf("HTTP3 not supported")
@@ -28,7 +28,7 @@ func (u *Upgrader) Accept(w http.ResponseWriter, r *http.Request) (*Conn, error)
 		return nil, ErrHTTP3NotSupported
 	}
 
-	stream, ok := w.(http3.DataStreamer)
+	stream, ok := w.(http3.HTTPStreamer)
 
 	if !ok {
 		return nil, ErrHTTP3NotSupported
@@ -46,7 +46,7 @@ func (u *Upgrader) Accept(w http.ResponseWriter, r *http.Request) (*Conn, error)
 		return nil, ErrHTTP3GetAddr
 	}
 
-	c := newConn(raddr, laddr.(net.Addr), r.Body, &flushWrite{w: w, f: flusher, s: stream.DataStream()})
+	c := newConn(raddr, laddr.(net.Addr), r.Body, &flushWrite{w: w, f: flusher, s: stream.HTTPStream()})
 
 	w.WriteHeader(u.StatusCode)
 
