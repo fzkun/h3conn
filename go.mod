@@ -1,4 +1,4 @@
-module github.com/fzkun/h3conn
+module e.coding.net/fzkun/zlkj/h3conn
 
 go 1.20
 
