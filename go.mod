@@ -1,4 +1,4 @@
-module e.coding.net/fzkun/zlkj/h3conn
+module github.com/polevpn/h3conn
 
 go 1.22
 
